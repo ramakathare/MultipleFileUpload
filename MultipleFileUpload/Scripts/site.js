@@ -52,9 +52,7 @@ function sendFile(myFile, i) {
             $("#deleteButton" + i).attr("disabled", "disabled");
             $("#statusMessage" + i).html("Success");
             myFile.done = 1;
-        }
-        debugger;
-        if (xhr.status == 404) {
+        }else {
             console.log("Server error");
             $('#progressbar' + i + ' div').addClass("failed");
             $("#statusMessage" + i).html("failed");
