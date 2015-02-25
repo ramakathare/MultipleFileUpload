@@ -4,8 +4,8 @@
 <head id="Head1" runat="server">
     <title>Upload Multiple Files or images</title>
     <script src="Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <link href="Content/Site.css" rel="stylesheet" />
     <script src="Scripts/site.js"></script>
+    <link href="Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <form>
