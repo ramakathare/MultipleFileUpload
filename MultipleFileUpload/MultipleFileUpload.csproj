@@ -124,13 +124,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\sharepointsite.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Services\UploadFile.asmx" />
-    <Content Include="UploadToSharepoint.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -158,13 +156,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="UploadToSharepoint.aspx.cs">
-      <DependentUpon>UploadToSharepoint.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UploadToSharepoint.aspx.designer.cs">
-      <DependentUpon>UploadToSharepoint.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
