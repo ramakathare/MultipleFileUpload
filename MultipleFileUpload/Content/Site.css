@@ -67,3 +67,9 @@
         .uploadFileButtonWrapper {
             text-align:center;
         }
+        .fileuploadInput {
+            visibility: hidden;
+            height: 0;
+            width: 0;
+            display: inline;
+        }

@@ -15,21 +15,28 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopPropagation();
         e.currentTarget.classList.remove('drop');
-        i = filesArray.length;
-        if (!$("#dropNotification").hasClass("displayNone")) { $("#dropNotification").addClass("displayNone"); $("#filesTable").removeClass("displayNone"); }
-        for (var j = 0; j < e.dataTransfer.files.length; j++) {
-            var myFile = new Object();
-            myFile.file = e.dataTransfer.files[j];
-            myFile.done = 0;
-            filesArray.push(myFile);
-        }
-        buildTable(e.dataTransfer.files);
+        AddFilesToFilesArray(e.dataTransfer.files);
     });
     dropArea.addEventListener('dragleave', function (e) {
         console.log("dragleave");
         e.currentTarget.classList.remove('drop');
     });
 });
+function addFilesToUploadController(fileControlId) {
+    AddFilesToFilesArray($("#" + fileControlId)[0].files);
+}
+function AddFilesToFilesArray(fileControlFiles){
+    i = filesArray.length;
+    if (!$("#dropNotification").hasClass("displayNone")) { $("#dropNotification").addClass("displayNone"); $("#filesTable").removeClass("displayNone"); }
+    for (var j = 0; j < fileControlFiles.length; j++) {
+        var myFile = new Object();
+        myFile.file = fileControlFiles[j];
+        myFile.done = 0;
+        filesArray.push(myFile);
+    }
+    buildTable(fileControlFiles);
+}
+
 function sendFile(myFile, i) {
     $('#progressbar' + i).removeClass("displayNone");
     var uri = "/Services/UploadFile.asmx/postFile";
@@ -37,6 +44,21 @@ function sendFile(myFile, i) {
     var fd = new FormData();
     fd.append('myFile', myFile.file);
     xhr.open("POST", uri, true);
+    xhr.onloadstart = function () {
+        activeAjaxConnections++;
+    };
+    xhr.onloadend = function () {
+        activeAjaxConnections--;
+        if (0 == activeAjaxConnections) {
+            count = 0;
+            var deleted = 0;
+            $(filesArray).each(function (index, item) {
+                if (item.done == 1) count++;
+                if (item.done < 0) deleted++;
+            });
+            alert("Completed " + count + " out of " + (filesArray.length - deleted));
+        }
+    };
     xhr.upload.onprogress = function (evt) {
         if (evt.lengthComputable) {
             var percentComplete = (evt.loaded / evt.total) * 100;
@@ -63,9 +85,20 @@ function sendFile(myFile, i) {
     };
     xhr.send(fd);
 }
+var activeAjaxConnections = 0;
 function uploadFiles() {
-    for (var j = 0; j < filesArray.length; j++) {
-        if (filesArray[j].done == 0) sendFile(filesArray[j], j);
+    count = 0;
+    deleted = 0;
+    $(filesArray).each(function (index, item) {
+        if (item.done == 1) count++;
+        if (item.done < 0) deleted++;
+    });
+    if ((filesArray.length - deleted) > count) {
+        for (var j = 0; j < filesArray.length; j++) {
+            if (filesArray[j].done == 0) sendFile(filesArray[j], j);
+        }
+    } else {
+        alert("Completed " + count + " out of " + (filesArray.length - deleted));
     }
 }
 function buildTable(fileList) {

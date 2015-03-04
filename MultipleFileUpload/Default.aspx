@@ -27,7 +27,9 @@
             <div id="droparea" class="dropArea">
             </div>
             <div class="uploadFileButtonWrapper">
-                <input class="uploadButton" type="button" onclick="uploadFiles()" value="upload" />
+                <input type="button" class="uploadButton" value="Browse" id="browse" onclick="$('#fileUploadControl').click();" />
+                <input id="fileUploadControl" class="fileuploadInput" type="file" multiple="multiple" onchange="addFilesToUploadController('fileUploadControl')" value="" />
+                <input class="uploadButton" type="button" onclick=" uploadFiles()" value="upload" />
             </div>
         </div>
     </form>
