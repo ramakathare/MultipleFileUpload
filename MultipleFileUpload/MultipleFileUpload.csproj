@@ -124,6 +124,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\MultiFileUpload_CaseMgmt.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />

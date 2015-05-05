@@ -5,7 +5,6 @@ $(document).ready(function () {
     dropArea.addEventListener('dragenter', function (e) {
         e.currentTarget.classList.add('drop');
     });
-
     dropArea.addEventListener('dragover', function (e) {
         e.preventDefault();
         e.stopPropagation();
