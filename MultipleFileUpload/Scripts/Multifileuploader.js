@@ -49,12 +49,16 @@ function sendFile(myFile, i) {
     xhr.onloadend = function () {
         activeAjaxConnections--;
         if (0 == activeAjaxConnections) {
+
             count = 0;
             var deleted = 0;
             $(filesArray).each(function (index, item) {
                 if (item.done == 1) count++;
                 if (item.done < 0) deleted++;
             });
+
+            /////////////////////Trigger your actual call back
+
             alert("Completed " + count + " out of " + (filesArray.length - deleted));
         }
     };
